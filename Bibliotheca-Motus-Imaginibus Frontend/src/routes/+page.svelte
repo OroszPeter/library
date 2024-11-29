@@ -12,7 +12,7 @@
     function toggleMenu() {
         isMenuOpen = !isMenuOpen;
     }
-</script>
+</script> a
 
 {#if isRendered}
 <main class="{ $nightMode ? 'nightMode' : '' } ">
