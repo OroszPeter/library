@@ -1,6 +1,0 @@
-@Bibliotheca_Motus_Imaginibus_HostAddress = http://localhost:5251
-
-GET {{Bibliotheca_Motus_Imaginibus_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
