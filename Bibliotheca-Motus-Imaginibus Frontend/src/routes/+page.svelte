@@ -1,11 +1,31 @@
 <script>
-    import { nightMode } from '../store.js'; // Importáljuk a nightMode store-t
+    import { nightMode, isLoggedIn, userStore } from '../store.js'; // Importáljuk a nightMode store-t
     import { onMount } from 'svelte';
+
+    let user = {};
 
     let isRendered = false; // Ezzel az állapottal biztosíthatod, hogy csak egyszer renderelje a komponenst.
 
     onMount(() => {
         isRendered = true; // Ha betöltődött, egyszerűen `true` értékre állítjuk.
+    });
+    function logout(event) {
+        event.preventDefault(); // Megakadályozza az alapértelmezett linkre kattintás viselkedést (újratöltés)
+
+        if (typeof window !== "undefined") {
+            localStorage.removeItem("jwtToken"); // Törli a jwtToken-t
+            localStorage.removeItem("loginTime"); // Törli a bejelentkezési időt
+            localStorage.clear(); // Eltávolít minden adatot a localStorage-ból
+        }
+
+        isLoggedIn.set(false); // Beállítjuk, hogy a felhasználó ki van jelentkezve
+        userStore.set({ username: "", email: "" }); // Ürítjük a userStore-t
+        window.location.href = "/"; // Átirányítás a főoldalra
+    }
+
+     // Figyeljük a userStore-t, és frissítjük a user adatokat
+     $: userStore.subscribe((value) => {
+        user = value;
     });
 
     let isMenuOpen = false;
@@ -21,11 +41,22 @@
             <h1 class="pt-5 pb-5 ps-5">Köszöntjük az oldalon!</h1>
         <p class="ps-5 pb-5">Bibliotheca Motus Imaginibus, mozgóképek tárháza. Itt filmeket és sorozatokat találhat minden mennyiségben.</p>
         </div>
+        {#if $isLoggedIn}
         <div id="right" class="pt-5 text-center { $nightMode ? 'nightMode' : '' }">
-            <h5 class="pt-5">Regisztrálj!</h5>
+            <h5 class="pt-5">Bejelentkezve, mint:</h5>
+        <p>{user.userName}</p>
+        <a href="/" class="p-1 register" on:click={logout}>Kijelentkezés</a>
+        </div>
+        {:else}
+        <div id="right" class="pt-5 text-center { $nightMode ? 'nightMode' : '' }">
+            <h5>Már van fiókod?</h5>
+            <a href="/login" class="p-1 register">Bejelentkezés</a>
+            <p>vagy</p>
+            <h5 class="">Regisztrálj!</h5>
         <p>Szeretnél Watchlistet létrehozni? Esetleg megosztanád véleményed?</p>
         <a href="/register" class="p-1 register">Regisztráció</a>
         </div>
+        {/if}
     </div>
     <div class="container">
         <!-- Első Carousel (3 képpel) -->
@@ -34,8 +65,8 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="d-flex justify-content-center">
-                        <a href="/movie">
-                            <img src="https://via.placeholder.com/800x400" class="d-block w-75" alt="Kép 1">
+                        <a href="/movie" class="img">
+                            <img src="/matrix.png" class="d-block w-100" alt="Kép 1">
                         </a>
                     </div>
                     <div class="carousel-caption position-static">
@@ -45,8 +76,8 @@
             </div>
             <div class="carousel-item">
                 <div class="d-flex justify-content-center">
-                    <a href="/movie">
-                        <img src="https://via.placeholder.com/800x400" class="d-block w-75" alt="Kép 2">
+                    <a href="/movie" class="img">
+                        <img src="https://via.placeholder.com/800x400" class="d-block w-100" alt="Kép 2">
                     </a>
                 </div>
                 <div class="carousel-caption position-static">
@@ -56,8 +87,8 @@
             </div>
             <div class="carousel-item">
                 <div class="d-flex justify-content-center">
-                    <a href="/movie">
-                        <img src="https://via.placeholder.com/800x400" class="d-block w-75" alt="Kép 3">
+                    <a href="/movie" class="img">
+                        <img src="https://via.placeholder.com/800x400" class="d-block w-100" alt="Kép 3">
                     </a>
                 </div>
                 <div class="carousel-caption position-static">
@@ -81,8 +112,8 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="d-flex justify-content-center">
-                        <a href="/movie">
-                            <img src="https://via.placeholder.com/800x400" class="d-block w-75" alt="Kép 1">
+                        <a href="/movie" class="img">
+                            <img src="https://via.placeholder.com/800x400" class="d-block w-100" alt="Kép 1">
                         </a>
                     </div>
                     <div class="carousel-caption position-static">
@@ -92,8 +123,8 @@
                 </div>
                 <div class="carousel-item">
                     <div class="d-flex justify-content-center">
-                        <a href="/movie">
-                            <img src="https://via.placeholder.com/800x400" class="d-block w-75" alt="Kép 2">
+                        <a href="/movie" class="img">
+                            <img src="https://via.placeholder.com/800x400" class="d-block w-100" alt="Kép 2">
                         </a>
                     </div>
                     <div class="carousel-caption position-static">
@@ -103,8 +134,8 @@
                 </div>
                 <div class="carousel-item">
                     <div class="d-flex justify-content-center">
-                        <a href="/movie">
-                            <img src="https://via.placeholder.com/800x400" class="d-block w-75" alt="Kép 3">
+                        <a href="/movie" class="img">
+                            <img src="https://via.placeholder.com/800x400" class="d-block w-100" alt="Kép 3">
                         </a>
                     </div>
                     <div class="carousel-caption position-static">
@@ -130,8 +161,8 @@
                     <div class="d-flex justify-content-around gap-3"> <!-- A justify-content-around egyenlő távolságot biztosít -->
                         {#each Array(5).fill(0) as _, index}
                             <div class="col text-center carousel-item-wrapper">
-                                <a href="/movie">
-                                    <img src="https://i.twic.pics/v1/placeholder:500x600" class="d-block" alt="Kép {index + 1}">
+                                <a href="/movie" class="sm">
+                                    <img src="https://i.twic.pics/v1/placeholder:500x600" class="d-block small" alt="Kép {index + 1}">
                                 </a>
                                 <div class="carousel-caption position-static">
                                     <h5 class="{ $nightMode ? 'nightMode' : '' } nfs-h5">Cím {index + 1}</h5>
@@ -144,8 +175,8 @@
                     <div class="d-flex justify-content-around gap-3">
                         {#each Array(5).fill(0) as _, index}
                             <div class="col text-center carousel-item-wrapper">
-                                <a href="/movie">
-                                    <img src="https://i.twic.pics/v1/placeholder:500x600" class="d-block" alt="Kép {index + 6}">
+                                <a href="/movie" class="sm">
+                                    <img src="https://i.twic.pics/v1/placeholder:500x600" class="d-block small" alt="Kép {index + 6}">
                                 </a>
                                 <div class="carousel-caption position-static">
                                     <h5 class="{ $nightMode ? 'nightMode' : '' } nfs-h5">Cím {index + 6}</h5>
@@ -169,6 +200,21 @@
 {/if}
 
 <style>
+    img{
+        border: 20px dashed black;
+    }
+    .img{
+            border-width: 15px;
+            border-style: double;
+            Border-color: black;
+    }
+    .sm{
+        border: 5px dashed black;
+    }
+    .small{
+            border: 5px dotted black;
+    }
+    
     main{
         background-color: #FFF2D7; /* Eredeti háttérszín */
     }

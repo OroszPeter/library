@@ -1,7 +1,7 @@
 <script>
     export let nightMode = false;
     let night_Mode = false;
-    import { nightMode as nightModeStore } from '../store.js';
+    import { nightMode as nightModeStore, isLoggedIn } from '../store.js';
 
     // Lenyíló menü állapota
     let isMenuOpen = false;
@@ -43,7 +43,11 @@
         <!-- Navigációs linkek nagyobb képernyőkre -->
         <div class="nav-links">
             <a href="/watchlist">Watchlist</a>
+            {#if $isLoggedIn}
+            <a href="/profile">Profil</a>
+            {:else}
             <a href="/login">Bejelentkezés</a>
+            {/if}
             <a href="" on:click={toggleLight}>CC</a>
         </div>
     </nav>
