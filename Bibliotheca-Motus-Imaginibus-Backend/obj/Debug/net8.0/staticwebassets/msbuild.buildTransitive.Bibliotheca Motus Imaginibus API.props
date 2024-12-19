@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\Bibliotheca Motus Imaginibus API.props" />
-</Project>

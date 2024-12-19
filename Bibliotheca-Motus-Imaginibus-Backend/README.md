@@ -1,1 +1,0 @@
-# Bibliotheca Motus Imaginibus API
