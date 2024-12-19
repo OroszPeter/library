@@ -4,7 +4,7 @@
   let movies = [];
   let ratings = [];
 
-  // API hívás a filmek és értékelések lekérésére
+  // API hívás a filmek és értékelések lekéréséree
   onMount(async () => {
     // Filmek lekérése
     const moviesResponse = await fetch('https://localhost:7214/api/Movie');
