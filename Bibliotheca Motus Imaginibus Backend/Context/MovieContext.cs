@@ -7,7 +7,7 @@ namespace Bibliotheca_Motus_Imaginibus_API.Context
 {
     public class MovieContext : IdentityDbContext<User>
     {
-        private readonly string _imageDirectory = @"C:\Users\Asus-01\source\repos\Bibliotheca Motus Imaginibus API\sources";
+        private readonly string _imageDirectory = @"C:\Users\Anita\Desktop\bmi\Bibliotheca Motus Imaginibus Backend\sources";
 
         public MovieContext(DbContextOptions<MovieContext> options) : base(options) { }
 

@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Bibliotheca Motus Imaginibus API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d996dc3c44ff7c736d49d87104657b80e65bcfeb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2f089be9d9ecd53f24988442be11669288ed8770")]
 [assembly: System.Reflection.AssemblyProductAttribute("Bibliotheca Motus Imaginibus API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Bibliotheca Motus Imaginibus API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

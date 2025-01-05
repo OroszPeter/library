@@ -84,6 +84,7 @@
       padding: 0;
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
+      overflow-y: hidden;
     }
 
     .bi{
@@ -105,9 +106,8 @@
     }
   
     .wrapper {
-      display: flex;
-      max-width: 1180px;
       position: relative;
+      overflow: hidden;
     }
   
     .wrapper i {
@@ -124,6 +124,7 @@
       border-radius: 50%;
       transform: translateY(-50%);
       transition: transform 0.1s linear;
+      z-index: 100;
     }
   
     .wrapper i:active {

@@ -1,5 +1,5 @@
 <script>
-    import { userStore, isLoggedIn, authToken } from '../../store.js';
+    import { userStore, isLoggedIn, authToken, API_Url } from '../../store.js';
     import { onMount } from 'svelte';
     import { browser } from '$app/environment';
 
@@ -41,7 +41,7 @@
         return;
     }
 
-    const response = await fetch('https://localhost:7214/api/Account/update-username', {
+    const response = await fetch(`${API_Url}Account/update-username`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -73,7 +73,7 @@
 
 
 const updateEmail = async () => {
-    const response = await fetch('https://localhost:7214/api/Account/update-email', {
+    const response = await fetch(`${API_Url}Account/update-email`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ const updateEmail = async () => {
 
 
 const updatePassword = async () => {
-    const response = await fetch('https://localhost:7214/api/Account/update-password', {
+    const response = await fetch(`${API_Url}Account/update-password`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json', 
@@ -136,7 +136,7 @@ const updatePassword = async () => {
 
     const deleteProfile = async () => {
         if (confirm('Biztosan törölni szeretnéd a profilodat?')) {
-            const response = await fetch('https://localhost:7214/api/Account/delete-profile', {
+            const response = await fetch(`${API_Url}Account/delete-profile`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`

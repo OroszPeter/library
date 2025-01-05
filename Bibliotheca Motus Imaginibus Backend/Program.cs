@@ -1,6 +1,7 @@
 using Bibliotheca_Motus_Imaginibus_API.Context;
 using Bibliotheca_Motus_Imaginibus_API.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -11,14 +12,14 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container .
 
 
 
 builder.Services.AddDbContext<MovieContext>(options =>
 {
-    options.UseMySQL("server=localhost;database=Bibliotheca_Motus_Imaginibus;user=root;password=");
-});
+    options.UseMySQL("server=db12289.public.databaseasp.net;database=db12289;user=db12289;password=bibliotheca");
+});                 //server=db12289.public.databaseasp.net;database=db12289;user=db12289;password=bibliotheca
 
 builder.Services.Configure<PasswordHasherOptions>(options =>
     options.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV2
@@ -28,12 +29,12 @@ builder.Services.Configure<PasswordHasherOptions>(options =>
 //Identity
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
-    options.Password.RequireDigit = false; // Nem kötelezõ számjegy
-    options.Password.RequireLowercase = false; // Nem kötelezõ kisbetû
-    options.Password.RequireUppercase = false; // Nem kötelezõ nagybetû
-    options.Password.RequireNonAlphanumeric = false; // Nem kötelezõ különleges karakter
-    options.Password.RequiredLength = 8; // Minimális jelszóhossz (pl.: 6 karakter)
-    options.Password.RequiredUniqueChars = 0; // Minimális egyedi karakterek száma
+    options.Password.RequireDigit = false; // Nem kï¿½telezï¿½ szï¿½mjegy
+    options.Password.RequireLowercase = false; // Nem kï¿½telezï¿½ kisbetï¿½
+    options.Password.RequireUppercase = false; // Nem kï¿½telezï¿½ nagybetï¿½
+    options.Password.RequireNonAlphanumeric = false; // Nem kï¿½telezï¿½ kï¿½lï¿½nleges karakter
+    options.Password.RequiredLength = 8; // Minimï¿½lis jelszï¿½hossz (pl.: 6 karakter)
+    options.Password.RequiredUniqueChars = 0; // Minimï¿½lis egyedi karakterek szï¿½ma
 })
     .AddEntityFrameworkStores<MovieContext>()
     .AddSignInManager()
@@ -97,7 +98,7 @@ builder.Services.AddCors(option =>
     option.AddPolicy("CorsPolicy", policyBuilder =>
     {
         policyBuilder
-            .AllowAnyOrigin()  // Bármilyen forrást engedélyez
+            .AllowAnyOrigin()  // Bï¿½rmilyen forrï¿½st engedï¿½lyez
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -107,11 +108,13 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Configure the HTTP request pipeline.
+//if (app.Environment.IsDevelopment())
+//{
+// Swagger will be available also on production hosting
+app.UseSwagger();
+app.UseSwaggerUI();
+//}
 
 app.UseCors("CorsPolicy");
 

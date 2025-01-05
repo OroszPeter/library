@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { API_Url } from '../store.js';
 
   let movies = [];
   let ratings = [];
@@ -7,11 +8,11 @@
   // API hívás a filmek és értékelések lekérésére
   onMount(async () => {
     // Filmek lekérése
-    const moviesResponse = await fetch('https://localhost:7214/api/Movie');
+    const moviesResponse = await fetch(`${API_Url}Movie`);
     movies = await moviesResponse.json();
 
     // Értékelések lekérése
-    const ratingsResponse = await fetch('https://localhost:7214/api/Ratings');
+    const ratingsResponse = await fetch(`${API_Url}Ratings`);
     ratings = await ratingsResponse.json();
 
     // A legújabb négy film kiválasztása
@@ -22,7 +23,7 @@
     await Promise.all(
           movies.map(async (movie) => {
             try {
-              movie.image = `https://localhost:7214/api/Movie/${movie.id}/kep`;
+              movie.image = `${API_Url}Movie/${movie.id}/kep`;
             } catch (error) {
               console.error(`Error loading image for movie ${movie.title}:`, error);
             }

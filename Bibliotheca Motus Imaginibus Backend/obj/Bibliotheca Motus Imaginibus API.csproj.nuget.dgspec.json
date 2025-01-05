@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Asus-01\\source\\repos\\Bibliotheca Motus Imaginibus API\\Bibliotheca Motus Imaginibus API.csproj": {}
+    "C:\\Users\\Anita\\Desktop\\bmi\\Bibliotheca Motus Imaginibus Backend\\Bibliotheca Motus Imaginibus API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Asus-01\\source\\repos\\Bibliotheca Motus Imaginibus API\\Bibliotheca Motus Imaginibus API.csproj": {
+    "C:\\Users\\Anita\\Desktop\\bmi\\Bibliotheca Motus Imaginibus Backend\\Bibliotheca Motus Imaginibus API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Asus-01\\source\\repos\\Bibliotheca Motus Imaginibus API\\Bibliotheca Motus Imaginibus API.csproj",
+        "projectUniqueName": "C:\\Users\\Anita\\Desktop\\bmi\\Bibliotheca Motus Imaginibus Backend\\Bibliotheca Motus Imaginibus API.csproj",
         "projectName": "Bibliotheca Motus Imaginibus API",
-        "projectPath": "C:\\Users\\Asus-01\\source\\repos\\Bibliotheca Motus Imaginibus API\\Bibliotheca Motus Imaginibus API.csproj",
-        "packagesPath": "C:\\Users\\Asus-01\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Asus-01\\source\\repos\\Bibliotheca Motus Imaginibus API\\obj\\",
+        "projectPath": "C:\\Users\\Anita\\Desktop\\bmi\\Bibliotheca Motus Imaginibus Backend\\Bibliotheca Motus Imaginibus API.csproj",
+        "packagesPath": "C:\\Users\\Anita\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Anita\\Desktop\\bmi\\Bibliotheca Motus Imaginibus Backend\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Asus-01\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Anita\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,8 +40,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -134,7 +130,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

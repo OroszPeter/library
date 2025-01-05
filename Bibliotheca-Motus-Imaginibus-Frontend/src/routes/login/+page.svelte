@@ -1,6 +1,6 @@
 <script>
     import { slide } from 'svelte/transition';
-    import { userStore, isLoggedIn, authToken } from '../../store.js';
+    import { userStore, isLoggedIn, authToken, API_Url } from '../../store.js';
 
     let selectedForm = 'login';
 
@@ -20,7 +20,7 @@
 
     async function handleLogin() {
         try {
-            const response = await fetch('https://localhost:7214/api/Account/login', {
+            const response = await fetch(`${API_Url}Account/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -40,7 +40,7 @@
             authToken.set({ token });
 
             // Felhasználói adatok lekérése
-            const userResponse = await fetch('https://localhost:7214/api/Account/me', {
+            const userResponse = await fetch(`${API_Url}Account/me`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -86,7 +86,7 @@
     }
     async function handleRegister() {
     try {
-        const response = await fetch('https://localhost:7214/api/Account/register', {
+        const response = await fetch(`${API_Url}Account/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

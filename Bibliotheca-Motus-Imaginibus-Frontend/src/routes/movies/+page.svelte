@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { API_Url } from '../../store.js';
   // A 'Link' komponenst eltávolítjuk, mivel nincs a @sveltejs/kit-ben
   let movies = []; // Filmek tárolása
   let ratings = []; // Értékelések tárolása
@@ -9,12 +10,12 @@
   onMount(async () => {
     try {
       // Lekérjük a filmeket
-      const movieResponse = await fetch('https://localhost:7214/api/Movie');
+      const movieResponse = await fetch(`${API_Url}Movie`);
       if (!movieResponse.ok) throw new Error('Hiba a filmek lekérésekor');
       movies = await movieResponse.json();
 
       // Lekérjük az értékeléseket
-      const ratingResponse = await fetch('https://localhost:7214/api/Ratings');
+      const ratingResponse = await fetch(`${API_Url}Ratings`);
       if (!ratingResponse.ok) throw new Error('Hiba az értékelések lekérésekor');
       ratings = await ratingResponse.json();
 
@@ -36,7 +37,7 @@
       await Promise.all(
         movies.map(async (movie) => {
           try {
-            movie.imageUrl = `https://localhost:7214/api/Movie/${movie.id}/kep`; // Közvetlen kép URL
+            movie.imageUrl = `${API_Url}Movie/${movie.id}/kep`; // Közvetlen kép URL
           } catch (error) {
             console.error(`Hiba a(z) ${movie.title} képének betöltésekor:`, error);
             movie.imageUrl = 'https://placehold.co/400x600'; // Placeholder kép
