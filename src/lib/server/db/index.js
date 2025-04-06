@@ -5,6 +5,23 @@ import { env } from '$env/dynamic/private';
 
 if (!env.DATABASE_URL) throw new Error('DATABASE_URL is not set');
 
-const client = await mysql.createConnection(env.DATABASE_URL);
+const connection = {
+  uri: env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+};
+
+let client;
+try {
+  client = await mysql.createConnection(connection);
+  
+  // Ping to check connection
+  await client.ping();
+  console.log('Database connected successfully');
+} catch (error) {
+  console.error('Error connecting to database:', error);
+  throw error;
+}
 
 export const db = drizzle(client, { schema, mode: 'default' });
