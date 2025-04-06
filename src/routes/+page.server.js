@@ -1,5 +1,5 @@
 import { db } from '$lib/server/db';
-import { books, users } from '$lib/server/db/schema';
+import { books, user } from '$lib/server/db/schema';
 
 export async function load() {
 	try {
@@ -11,7 +11,7 @@ export async function load() {
 		// Get total users count
 		const [{ count: totalUsers }] = await db
 			.select({ count: db.fn.count() })
-			.from(users);
+			.from(user);
 
 		// Get unique genres count
 		const allBooks = await db.select({ genre: books.genre }).from(books);
