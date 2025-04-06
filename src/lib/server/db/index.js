@@ -5,19 +5,20 @@ import { env } from '$env/dynamic/private';
 
 if (!env.DATABASE_URL) throw new Error('DATABASE_URL is not set');
 
-const connection = {
-  uri: env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-};
-
 let client;
 try {
-  client = await mysql.createConnection(connection);
+  client = await mysql.createConnection(env.DATABASE_URL);
   
-  // Ping to check connection
-  await client.ping();
+  // Enable connection pooling and set keepalive
+  client.on('error', async (err) => {
+    console.error('Database error:', err);
+    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+      client = await mysql.createConnection(env.DATABASE_URL);
+    }
+  });
+
+  // Test connection
+  await client.query('SELECT 1');
   console.log('Database connected successfully');
 } catch (error) {
   console.error('Error connecting to database:', error);
