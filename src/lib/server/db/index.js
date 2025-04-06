@@ -7,13 +7,23 @@ if (!env.DATABASE_URL) throw new Error('DATABASE_URL is not set');
 
 let client;
 try {
-  client = await mysql.createConnection(env.DATABASE_URL);
+  const connectionConfig = {
+    host: 'db16832.public.databaseasp.net',
+    user: 'db16832',
+    password: 'M=q8@p9PL#b5',
+    database: 'db16832',
+    port: 3306,
+    ssl: false,
+    insecureAuth: true
+  };
+
+  client = await mysql.createConnection(connectionConfig);
   
   // Enable connection pooling and set keepalive
   client.on('error', async (err) => {
     console.error('Database error:', err);
     if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-      client = await mysql.createConnection(env.DATABASE_URL);
+      client = await mysql.createConnection(connectionConfig);
     }
   });
 
