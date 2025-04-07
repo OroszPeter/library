@@ -5,6 +5,7 @@
 	import { SvelteToast, toast } from '@zerodevx/svelte-toast';
 
 	export let data;
+	$: user = $page.data.user;
 
 	const toastOptions = {
 		duration: 4000,
@@ -61,8 +62,8 @@
 			{/if}
 			
 			<div class="right menu">
-				{#if $page.data?.user}
-					<span class="item">Üdvözöljük, {$page.data.user.username}!</span>
+				{#if user}
+					<span class="item">Üdvözöljük, {user.username}!</span>
 					<a href="/" class="item" on:click|preventDefault={handleLogout}>Kijelentkezés</a>
 				{:else}
 					<a href="/auth" class="item" class:active={$page.url.pathname === '/auth'}>Bejelentkezés / Regisztráció</a>
