@@ -24,13 +24,13 @@
 			});
 
 			if (response.ok) {
+				await invalidate('app:user');
+				await goto('/auth');
 				toast.push('Sikeres kijelentkezés', {
 					theme: {
 						'--toastBarBackground': '#4CAF50'
 					}
 				});
-				await invalidate('app:user');
-				goto('/auth');
 			} else {
 				throw new Error('Kijelentkezés sikertelen');
 			}
@@ -57,7 +57,7 @@
 		<div class="ui container">
 			<a href="/" class="item" class:active={$page.url.pathname === '/'}>Kezdőlap</a>
 			<a href="/books" class="item" class:active={$page.url.pathname === '/books'}>Könyvek</a>
-			{#if $page.data?.user}
+			{#if user}
 				<a href="/books/add" class="item" class:active={$page.url.pathname === '/books/add'}>Új könyv</a>
 			{/if}
 			

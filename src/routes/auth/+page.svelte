@@ -36,7 +36,7 @@
 					}
 				});
 				await invalidate('app:user');
-				goto('/books');
+				await goto('/books');
 				return;
 			}
 
