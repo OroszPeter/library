@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { goto, invalidate } from '$app/navigation';
 	import { toast } from '@zerodevx/svelte-toast';
+	import { browser } from '$app/environment';
 
 	export let data;
 
@@ -35,8 +36,14 @@
 						'--toastBarBackground': '#4CAF50'
 					}
 				});
-				await invalidate('app:user');
-				await goto('/books');
+				
+				// Teljes oldal frissítés a bejelentkezéshez
+				if (browser) {
+					window.location.href = '/books';
+				} else {
+					await invalidate('app:user');
+					await goto('/books');
+				}
 				return;
 			}
 

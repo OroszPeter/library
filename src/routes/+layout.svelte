@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { invalidate } from '$app/navigation';
 	import { SvelteToast, toast } from '@zerodevx/svelte-toast';
+	import { browser } from '$app/environment';
 
 	export let data;
 	$: user = $page.data.user;
@@ -24,13 +25,19 @@
 			});
 
 			if (response.ok) {
-				await invalidate('app:user');
-				await goto('/auth');
 				toast.push('Sikeres kijelentkezés', {
 					theme: {
 						'--toastBarBackground': '#4CAF50'
 					}
 				});
+				
+				// Teljes oldal frissítés a kijelentkezéshez
+				if (browser) {
+					window.location.href = '/auth';
+				} else {
+					await invalidate('app:user');
+					await goto('/auth');
+				}
 			} else {
 				throw new Error('Kijelentkezés sikertelen');
 			}
