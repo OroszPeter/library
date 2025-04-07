@@ -31,7 +31,9 @@ export async function POST({ request, cookies }) {
 			expires: session.expiresAt
 		});
 
-		return json({ success: true });
+		// Return user data without sensitive information
+		const { passwordHash, ...userData } = dbUser;
+		return json({ success: true, user: userData });
 	} catch (error) {
 		console.error('Bejelentkezési hiba:', error);
 		return json({ error: 'Ismeretlen hiba történt' }, { status: 500 });

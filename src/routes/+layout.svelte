@@ -1,6 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
+	import { invalidate } from '$app/navigation';
 	import { SvelteToast, toast } from '@zerodevx/svelte-toast';
 
 	export let data;
@@ -27,6 +28,7 @@
 						'--toastBarBackground': '#4CAF50'
 					}
 				});
+				await invalidate('app:user');
 				goto('/auth');
 			} else {
 				throw new Error('Kijelentkezés sikertelen');
